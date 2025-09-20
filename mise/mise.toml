@@ -1,0 +1,19 @@
+[tasks."kaggle-init"]
+description = "Initialize a Kaggle project with uv, marimo, GPU-aware deps, and safe ops"
+run = "bash ${XDG_CONFIG_HOME:-$HOME/.config}/mise/scripts/kaggle-init.sh"
+
+[tasks."kaggle-download"]
+description = "Re-download and safely extract Kaggle data"
+run = "bash ${XDG_CONFIG_HOME:-$HOME/.config}/mise/scripts/kaggle-download.sh"
+
+[tasks."nb-serve"]
+description = "Open marimo editor for EDA notebook"
+run = "bash ${XDG_CONFIG_HOME:-$HOME/.config}/mise/scripts/nb-serve.sh"
+
+[tasks."train"]
+description = "Run training pipeline (XGBoost/PyTorch skeleton)"
+run = "bash ${XDG_CONFIG_HOME:-$HOME/.config}/mise/scripts/train.sh"
+
+[tasks."kaggle-submit"]
+description = "Validate and submit submission.csv (optional)"
+run = "bash ${XDG_CONFIG_HOME:-$HOME/.config}/mise/scripts/kaggle-submit.sh"

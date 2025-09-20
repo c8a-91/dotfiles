@@ -1,0 +1,12 @@
+.venv/
+.python-version
+uv.lock
+__pycache__/
+.ipynb_checkpoints/
+data/raw/
+data/processed/
+data/interim/
+data/external/
+runs/
+.env
+*.pyc
