@@ -108,7 +108,11 @@ def __(console, file_path, frame, pl):
             summary = frame.describe()
         except Exception:
             # Polars may fail describe on some types; fallback to minimal stats
-            numeric = [c for c, t in zip(frame.columns, frame.dtypes) if t.is_numeric()]
+            numeric = [
+                c
+                for c, t in zip(frame.columns, frame.dtypes)
+                if pl.datatypes.is_numeric(t)
+            ]
             summary = (
                 frame.select(
                     [pl.col(numeric).mean().alias("mean_" + c) for c in numeric]
@@ -131,7 +135,7 @@ def __(console, frame, pl):
         numeric_col = None
     else:
         numeric_cols = [
-            c for c, t in zip(frame.columns, frame.dtypes) if t.is_numeric()
+            c for c, t in zip(frame.columns, frame.dtypes) if pl.datatypes.is_numeric(t)
         ]
         numeric_col = numeric_cols[0] if numeric_cols else None
         if numeric_col:
@@ -158,8 +162,7 @@ def __(frame, numeric_col, pl):
             )
         )
         fig.update_layout(title_text=f"Histogram: {numeric_col}")
-        fig(os error 2)
-        --> notebook:1:1
+
     fig
     return fig
 
