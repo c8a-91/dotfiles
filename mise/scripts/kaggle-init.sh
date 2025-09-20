@@ -266,6 +266,32 @@ write_template_file "${SCRIPT_DIR}/templates/notebooks/eda.py" "$PROJECT_DIR/not
 
 write_template_file "${SCRIPT_DIR}/templates/notebooks/train.py" "$PROJECT_DIR/notebooks/train.py" 0644 MARIMO_VERSION="$MARIMO_VERSION"
 
+# Download CLAUDE.md for Claude Code integration with marimo
+log "Downloading CLAUDE.md for Claude Code integration"
+if curl -sS https://docs.marimo.io/CLAUDE.md -o "$PROJECT_DIR/CLAUDE.md" 2>/dev/null; then
+  # Append Kaggle-specific context to CLAUDE.md
+  cat >> "$PROJECT_DIR/CLAUDE.md" <<EOF
+
+## Additional Kaggle Competition Context
+
+This project is set up for a Kaggle competition: ${SLUG}
+
+Key project structure:
+- Data is stored in \`data/raw/${SLUG}/\`
+- Notebooks are in \`notebooks/\` (eda.py, train.py)
+- Source code is in \`src/\` with modules for data, features, models, and visualization
+- Use efficient data loading strategies for large datasets
+- Consider memory optimization techniques when working with limited resources
+- Focus on creating reproducible pipelines for model training
+- Document feature engineering steps clearly
+- Track experiment results and model performance metrics
+EOF
+  log "Successfully downloaded and customized CLAUDE.md"
+else
+  warn "Failed to download CLAUDE.md. You can manually download it with:"
+  warn "  curl https://docs.marimo.io/CLAUDE.md > $PROJECT_DIR/CLAUDE.md"
+fi
+
 if ! run_uv "uv sync" sync; then
   warn "uv sync failed. Run 'uv sync' manually when dependencies are available."
 fi
@@ -287,6 +313,7 @@ write_template_file "${SCRIPT_DIR}/templates/root/.envrc" "$PROJECT_DIR/.envrc" 
 
 log "Initialization complete."
 log "Created .envrc for direnv. Inside the project directory, run 'direnv allow' once to enable auto-activation of .venv and loading of .env."
+log "Created CLAUDE.md for optimal Claude Code integration with marimo notebooks."
 log "Try these next commands:"
 log "  cd $PROJECT_DIR"
 log "  mise run nb-serve"
