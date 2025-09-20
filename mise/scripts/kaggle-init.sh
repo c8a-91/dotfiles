@@ -286,10 +286,12 @@ Key project structure:
 - Document feature engineering steps clearly
 - Track experiment results and model performance metrics
 EOF
-  log "Successfully downloaded and customized CLAUDE.md"
+  cp "$PROJECT_DIR/CLAUDE.md" "$PROJECT_DIR/AGENTS.md"
+  log "Successfully downloaded and customized CLAUDE.md and created AGENTS.md"
 else
   warn "Failed to download CLAUDE.md. You can manually download it with:"
   warn "  curl https://docs.marimo.io/CLAUDE.md > $PROJECT_DIR/CLAUDE.md"
+  warn "  curl https://docs.marimo.io/CLAUDE.md > $PROJECT_DIR/AGENTS.md"
 fi
 
 if ! run_uv "uv sync" sync; then
@@ -313,7 +315,7 @@ write_template_file "${SCRIPT_DIR}/templates/root/.envrc" "$PROJECT_DIR/.envrc" 
 
 log "Initialization complete."
 log "Created .envrc for direnv. Inside the project directory, run 'direnv allow' once to enable auto-activation of .venv and loading of .env."
-log "Created CLAUDE.md for optimal Claude Code integration with marimo notebooks."
+log "Created CLAUDE.md and AGENTS.md for optimal Claude Code integration with marimo notebooks."
 log "Try these next commands:"
 log "  cd $PROJECT_DIR"
 log "  mise run nb-serve"
