@@ -150,10 +150,9 @@ def __(frame, numeric_col, pl):
 
     fig = None
     if numeric_col and not frame.is_empty():
-        # Convert to pandas for Plotly compat
+        # Use Polars Series as a list for Plotly
         fig = px.histogram(
-            frame.to_pandas(),
-            x=numeric_col,
+            x=frame.get_column(numeric_col).to_list(),
             nbins=50,
             title=f"Histogram: {numeric_col}",
         )

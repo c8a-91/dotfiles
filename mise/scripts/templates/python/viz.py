@@ -14,7 +14,7 @@ def histogram(frame: pl.DataFrame, column: str):
     Returns:
         A plotly.graph_objs._figure.Figure instance.
     """
-    return px.histogram(frame.to_pandas(), x=column)
+    return px.histogram(x=frame.get_column(column).to_list())
 
 
 __all__ = ["histogram"]

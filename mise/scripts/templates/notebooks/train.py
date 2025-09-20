@@ -169,11 +169,11 @@ def __(TASK, X_test, preds):
     """
     if TASK == "classification":
         import plotly.express as px
-        import pandas as pd
+        import polars as pl
 
-        df = pd.DataFrame({"pred": preds})
+        s = pl.Series("pred", preds)
         fig = px.histogram(
-            df, x="pred", nbins=50, title="Predicted probability distribution"
+            x=s.to_list(), nbins=50, title="Predicted probability distribution"
         )
         fig
     else:
