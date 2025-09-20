@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import polars as pl
-import plotly.express as px
+import plotly.graph_objects as go
 
 
 def histogram(frame: pl.DataFrame, column: str):
@@ -14,7 +14,7 @@ def histogram(frame: pl.DataFrame, column: str):
     Returns:
         A plotly.graph_objs._figure.Figure instance.
     """
-    return px.histogram(x=frame.get_column(column).to_list())
+    return go.Figure(go.Histogram(x=frame.get_column(column).to_list()))
 
 
 __all__ = ["histogram"]

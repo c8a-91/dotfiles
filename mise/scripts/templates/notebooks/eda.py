@@ -146,17 +146,20 @@ def __(frame, numeric_col, pl):
     """
     Plotly histogram helper: returns a figure or None.
     """
-    import plotly.express as px
+    import plotly.graph_objects as go
 
     fig = None
     if numeric_col and not frame.is_empty():
         # Use Polars Series as a list for Plotly
-        fig = px.histogram(
-            x=frame.get_column(numeric_col).to_list(),
-            nbins=50,
-            title=f"Histogram: {numeric_col}",
+        fig = go.Figure(
+            go.Histogram(
+                x=frame.get_column(numeric_col).to_list(),
+                nbinsx=50,
+            )
         )
-        fig
+        fig.update_layout(title_text=f"Histogram: {numeric_col}")
+        fig(os error 2)
+        --> notebook:1:1
     fig
     return fig
 

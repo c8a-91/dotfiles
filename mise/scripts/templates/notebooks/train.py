@@ -168,13 +168,15 @@ def __(TASK, X_test, preds):
     Skipped for regression.
     """
     if TASK == "classification":
-        import plotly.express as px
-        import polars as pl
+        import plotly.graph_objects as go
 
-        s = pl.Series("pred", preds)
-        fig = px.histogram(
-            x=s.to_list(), nbins=50, title="Predicted probability distribution"
+        fig = go.Figure(
+            go.Histogram(
+                x=preds,
+                nbinsx=50,
+            )
         )
+        fig.update_layout(title_text="Predicted probability distribution")
         fig
     else:
         print("Regression task: skipping probability histogram.")
