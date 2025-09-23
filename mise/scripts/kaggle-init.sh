@@ -285,6 +285,18 @@ Key project structure:
 - Focus on creating reproducible pipelines for model training
 - Document feature engineering steps clearly
 - Track experiment results and model performance metrics
+
+## Data Processing Guidelines
+
+**IMPORTANT: This project uses Polars as the primary data processing library.**
+
+- Always use Polars (import polars as pl) for data manipulation instead of pandas
+- Polars is already installed and configured in this project
+- Key advantages of Polars:
+  - Lazy evaluation for query optimization
+  - Better memory efficiency for large datasets
+  - Faster execution through columnar storage and parallelization
+  - More predictable performance characteristics
 EOF
   cp "$PROJECT_DIR/CLAUDE.md" "$PROJECT_DIR/AGENTS.md"
   log "Successfully downloaded and customized CLAUDE.md and created AGENTS.md"
